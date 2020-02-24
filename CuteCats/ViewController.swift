@@ -10,11 +10,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var cats: [Cat] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        CatController.getCats { (cats) in
+            self.cats = cats
+        }
     }
-
-
 }
 

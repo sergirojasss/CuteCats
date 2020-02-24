@@ -7,6 +7,7 @@ target 'CuteCats' do
 
   # Pods for CuteCats
   pod 'SwiftyJSON', '~> 4.0' #handle network requests
+  pod 'Alamofire', '~> 5.0' #for network requests
 
   target 'CuteCatsTests' do
     inherit! :search_paths

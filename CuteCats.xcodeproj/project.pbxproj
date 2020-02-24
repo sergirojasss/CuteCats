@@ -21,6 +21,8 @@
 		FEA28D7C2403EB310057191E /* CuteCatsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA28D7B2403EB310057191E /* CuteCatsTests.swift */; };
 		FEA28D872403EB310057191E /* CuteCatsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA28D862403EB310057191E /* CuteCatsUITests.swift */; };
 		FEF34FDE24042A0F00940573 /* CatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF34FDD24042A0F00940573 /* CatController.swift */; };
+		FEF34FE1240432A300940573 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF34FE0240432A300940573 /* extensions.swift */; };
+		FEF34FE42404335400940573 /* CatsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF34FE32404335400940573 /* CatsCVCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		FEA28D862403EB310057191E /* CuteCatsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CuteCatsUITests.swift; sourceTree = "<group>"; };
 		FEA28D882403EB310057191E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FEF34FDD24042A0F00940573 /* CatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatController.swift; sourceTree = "<group>"; };
+		FEF34FE0240432A300940573 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		FEF34FE32404335400940573 /* CatsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +169,10 @@
 				FEA28D662403EB2A0057191E /* SceneDelegate.swift */,
 				FEA28D682403EB2A0057191E /* ViewController.swift */,
 				FE690420240424C00021B96C /* Entities */,
+				FEF34FE22404331800940573 /* Cells */,
 				FEF34FDC240429F900940573 /* Controllers */,
 				FE69041D240410340021B96C /* Networking */,
+				FEF34FDF2404326500940573 /* Extensions */,
 				FEA28D6A2403EB2A0057191E /* Main.storyboard */,
 				FEA28D6D2403EB310057191E /* Assets.xcassets */,
 				FEA28D6F2403EB310057191E /* LaunchScreen.storyboard */,
@@ -199,6 +205,22 @@
 				FEF34FDD24042A0F00940573 /* CatController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		FEF34FDF2404326500940573 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FEF34FE0240432A300940573 /* extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FEF34FE22404331800940573 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FEF34FE32404335400940573 /* CatsCVCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,9 +465,11 @@
 				FE69041F240410510021B96C /* NetworkController.swift in Sources */,
 				FEA28D692403EB2A0057191E /* ViewController.swift in Sources */,
 				FE690422240424D60021B96C /* Cat.swift in Sources */,
+				FEF34FE1240432A300940573 /* extensions.swift in Sources */,
 				FEA28D652403EB2A0057191E /* AppDelegate.swift in Sources */,
 				FEF34FDE24042A0F00940573 /* CatController.swift in Sources */,
 				FEA28D672403EB2A0057191E /* SceneDelegate.swift in Sources */,
+				FEF34FE42404335400940573 /* CatsCVCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

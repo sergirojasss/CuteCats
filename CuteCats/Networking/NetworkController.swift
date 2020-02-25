@@ -31,7 +31,7 @@ class NetworkController {
                     for json in responseJson["data"].arrayValue {
                         for unit in json["images"].arrayValue {
                             if !unit["animated"].boolValue { //makeing sure it's a picture
-                            let cat: Cat = Cat(name: unit["description"].stringValue, link: unit["link"].stringValue, views: unit["views"].intValue)
+                            let cat: Cat = Cat(title: unit["description"].stringValue, link: unit["link"].stringValue, views: unit["views"].intValue)
                             
                             cats.append(cat)
                             }

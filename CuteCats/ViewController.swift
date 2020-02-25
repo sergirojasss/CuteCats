@@ -39,18 +39,21 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell: CatsCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatsCell", for: indexPath) as? CatsCVCell {
-            let hud: MBProgressHUD = MBProgressHUD.init(view: cell.catImageView)
-            hud.backgroundColor = UIColor.black
-            hud.mode = .indeterminate
-            hud.show(animated: true)
+            
+            cell.catImageView.image = nil
+            show(view: cell.catImageView)
             
             let cat: Cat = cats[indexPath.row]
-            
+            cell.title.text = cat.title
+            cell.numOfViews.text = String(cat.views)
+
             if let image = self.dict[cat.id] {
                 cell.catImageView.image = image
+                hide(view: cell.catImageView)
             } else {
                 cell.catImageView.downloaded(from: cat.link) { (image) in
                     cell.catImageView.image = image
+                    self.hide(view: cell.catImageView)
                     self.dict[cat.id] = image
                 }
                 cell.layer.shouldRasterize = true
@@ -63,7 +66,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: self.collectionView.frame.width / 2, height: 300)
+    }
+    
+//    - MARK: Progress hud
+    
+    func show(view: UIView) {
+        let hud = MBProgressHUD.showAdded(to: view, animated: true)
+        hud.isUserInteractionEnabled = false
+        hud.show(animated: true)
+
+    }
+    
+    func hide(view: UIView) {
+        MBProgressHUD.hide(for: view, animated: true)
     }
 }
 

@@ -12,5 +12,7 @@ class CatsCVCell: UICollectionViewCell {
     
     @IBOutlet var catImageView: UIImageView!
     
+    @IBOutlet var title: UILabel!
+    @IBOutlet var numOfViews: UILabel!
     
 }

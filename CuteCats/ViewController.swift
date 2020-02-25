@@ -42,7 +42,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell: CatsCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatsCell", for: indexPath) as? CatsCVCell {
-            
+            cell.catImageView.image = UIImage(named: "placeholder")
+
             let cat: Cat = cats[indexPath.row]
             show(view: cell.catImageView)
 

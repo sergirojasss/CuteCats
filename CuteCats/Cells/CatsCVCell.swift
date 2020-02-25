@@ -18,7 +18,6 @@ class CatsCVCell: UICollectionViewCell {
     
     
     override func awakeFromNib() {
-        self.catImageView.image = UIImage(named: "placeholder")
         self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
     }
     

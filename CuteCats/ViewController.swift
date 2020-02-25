@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var cats: [Cat] = []
-    var dict: [IndexPath: UIImage] = [:]
+    var dict: [String: UIImage] = [:]
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -27,7 +28,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
     }
     
-//    - MARK: Collection view methods
+    //    - MARK: Collection view methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -38,19 +39,29 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell: CatsCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatsCell", for: indexPath) as? CatsCVCell {
-            if let image = self.dict[indexPath] {
+            let hud: MBProgressHUD = MBProgressHUD.init(view: cell.catImageView)
+            hud.backgroundColor = UIColor.black
+            hud.mode = .indeterminate
+            hud.show(animated: true)
+            
+            let cat: Cat = cats[indexPath.row]
+            
+            if let image = self.dict[cat.id] {
                 cell.catImageView.image = image
             } else {
-                cell.catImageView.downloaded(from: cats[indexPath.row].link)
-                if let image: UIImage = cell.catImageView.image {
-                    self.dict[indexPath] = image
+                cell.catImageView.downloaded(from: cat.link) { (image) in
+                    cell.catImageView.image = image
+                    self.dict[cat.id] = image
                 }
+                cell.layer.shouldRasterize = true
+                cell.layer.rasterizationScale = UIScreen.main.scale
+                
             }
             return cell
         }
         return UICollectionViewCell()
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 200, height: 200)
     }

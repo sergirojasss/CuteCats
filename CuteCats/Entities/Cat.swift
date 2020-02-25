@@ -9,11 +9,13 @@
 import Foundation
 
 class Cat {
+    var id: String!
     var name: String?
     var link: String!
     var views: Int!
     
     init(name: String? = nil, link: String, views: Int) {
+        self.id = UUID().uuidString
         self.name = name
         self.link = link
         self.views = views

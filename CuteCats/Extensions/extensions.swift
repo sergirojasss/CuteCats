@@ -17,7 +17,7 @@ extension UIImageView {
 //        self.image = UIImage(named: Constants.imagePlaceholder)
 //    }
     
-    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit, completion: @escaping (_ success: UIImage) -> Void) {
 
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -28,13 +28,16 @@ extension UIImageView {
                 let image = UIImage(data: data)
                 else { return }
             DispatchQueue.main.async() {
-                self.image = image
+//                self.image = image
+                completion(image)
             }
         }.resume()
     }
-    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit, completion: @escaping (_ success: UIImage) -> Void) {
         guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
+        downloaded(from: url, contentMode: mode) { (image) in
+            completion(image)
+        }
     }
     
 //    func saveOnDevice(fileName: String, image: UIImage) {

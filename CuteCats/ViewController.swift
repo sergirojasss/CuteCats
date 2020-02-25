@@ -25,11 +25,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         self.title = NSLocalizedString("cats", comment: "")
         
-        CatController.getCats { (cats) in
-            self.cats = cats
-            self.collectionView.reloadData()
+        self.loadData()
+    }
+    
+    func loadData() {
+        DispatchQueue.global(qos: .userInteractive).async {
+            CatController.getCats { (cats) in
+                //The threads stuff: Checkd and the response of Alamofire, it's on the main thread, so this callback, its executed on the main thread
+                self.cats = cats
+                self.collectionView.reloadData()
+            }
         }
     }
+    
+    override func didReceiveMemoryWarning() {
+        self.dict.removeAll()
+    }
+    
     
     //    - MARK: Collection view methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -45,22 +57,23 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.catImageView.image = UIImage(named: "placeholder")
 
             let cat: Cat = cats[indexPath.row]
-            show(view: cell.catImageView)
+            self.show(view: cell.catImageView)
 
             cell.setLables(cat: cat)
 
-            if let image = self.dict[cat.id] {
+            if let image = self.dict[cat.id] { // image stored into the dictionary
                 cell.catImageView.image = image
-                hide(view: cell.catImageView)
-            } else {
+                self.hide(view: cell.catImageView)
+            } else { // have to download image
                 cell.catImageView.downloaded(from: cat.link) { (image) in
-                    cell.catImageView.image = image
-                    self.hide(view: cell.catImageView)
                     self.dict[cat.id] = image
+                    if collectionView.indexPathsForVisibleItems.contains(indexPath) {
+                        cell.catImageView.image = image
+                        self.hide(view: cell.catImageView)
+                    } else {
+                        collectionView.reloadItems(at: [indexPath])
+                    }
                 }
-                cell.layer.shouldRasterize = true
-                cell.layer.rasterizationScale = UIScreen.main.scale
-                
             }
             return cell
         }
@@ -73,6 +86,11 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //        return UICollectionViewFlowLayout.automaticSize
     }
     
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let cat = cats[indexPath.row]
+//        print(cats[indexPath.row].link)
+//    }
+    
     //reload data when device rotates
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         self.collectionView.reloadData()
@@ -81,6 +99,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     //    - MARK: Progress hud
     
     func show(view: UIView) {
+        hide(view: view)
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
         hud.isUserInteractionEnabled = false
         hud.show(animated: true)

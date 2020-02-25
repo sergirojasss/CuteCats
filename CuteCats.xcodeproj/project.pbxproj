@@ -23,6 +23,7 @@
 		FEF34FDE24042A0F00940573 /* CatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF34FDD24042A0F00940573 /* CatController.swift */; };
 		FEF34FE1240432A300940573 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF34FE0240432A300940573 /* extensions.swift */; };
 		FEF34FE42404335400940573 /* CatsCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEF34FE32404335400940573 /* CatsCVCell.swift */; };
+		FEFB5E0A24052CF500F92BB0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = FEFB5E0924052CF500F92BB0 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		FEF34FDD24042A0F00940573 /* CatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatController.swift; sourceTree = "<group>"; };
 		FEF34FE0240432A300940573 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		FEF34FE32404335400940573 /* CatsCVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatsCVCell.swift; sourceTree = "<group>"; };
+		FEFB5E0924052CF500F92BB0 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +179,7 @@
 				FEA28D6D2403EB310057191E /* Assets.xcassets */,
 				FEA28D6F2403EB310057191E /* LaunchScreen.storyboard */,
 				FEA28D722403EB310057191E /* Info.plist */,
+				FEFB5E0924052CF500F92BB0 /* Localizable.strings */,
 			);
 			path = CuteCats;
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEA28D712403EB310057191E /* LaunchScreen.storyboard in Resources */,
+				FEFB5E0A24052CF500F92BB0 /* Localizable.strings in Resources */,
 				FEA28D6E2403EB310057191E /* Assets.xcassets in Resources */,
 				FEA28D6C2403EB2A0057191E /* Main.storyboard in Resources */,
 			);

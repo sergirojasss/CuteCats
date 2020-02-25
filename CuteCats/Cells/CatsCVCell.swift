@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class CatsCVCell: UICollectionViewCell {
     
@@ -15,4 +16,18 @@ class CatsCVCell: UICollectionViewCell {
     @IBOutlet var title: UILabel!
     @IBOutlet var numOfViews: UILabel!
     
+    
+    override func awakeFromNib() {
+        self.catImageView.image = UIImage(named: "placeholder")
+        self.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
+    }
+    
+    func setLables(cat: Cat) {
+        
+        self.title.text = cat.title
+        self.numOfViews.text = String(cat.views)
+
+    }
+    
+
 }

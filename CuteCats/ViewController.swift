@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var cats: [Cat] = []
     var dict: [String: UIImage] = [:]
@@ -21,6 +21,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         // Do any additional setup after loading the view.
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        self.collectionView.backgroundColor = UIColor.white
+        
+        self.title = NSLocalizedString("cats", comment: "")
         
         CatController.getCats { (cats) in
             self.cats = cats
@@ -40,12 +43,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell: CatsCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatsCell", for: indexPath) as? CatsCVCell {
             
-            cell.catImageView.image = nil
-            show(view: cell.catImageView)
-            
             let cat: Cat = cats[indexPath.row]
-            cell.title.text = cat.title
-            cell.numOfViews.text = String(cat.views)
+            show(view: cell.catImageView)
+
+            cell.setLables(cat: cat)
 
             if let image = self.dict[cat.id] {
                 cell.catImageView.image = image
@@ -66,10 +67,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.collectionView.frame.width / 2, height: 300)
+        let width = (self.collectionView.frame.width - 5) / 2 // 5 min space btw cells
+        return CGSize(width: width, height: 300)
+//        return UICollectionViewFlowLayout.automaticSize
     }
     
-//    - MARK: Progress hud
+    //reload data when device rotates
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        self.collectionView.reloadData()
+    }
+    
+    //    - MARK: Progress hud
     
     func show(view: UIView) {
         let hud = MBProgressHUD.showAdded(to: view, animated: true)
@@ -81,5 +89,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     func hide(view: UIView) {
         MBProgressHUD.hide(for: view, animated: true)
     }
+
 }
 

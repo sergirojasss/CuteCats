@@ -54,10 +54,10 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell: CatsCVCell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatsCell", for: indexPath) as? CatsCVCell {
-            cell.catImageView.image = UIImage(named: "placeholder")
+            cell.catImageView.image = UIImage(named: "placeholder") //setting placeholder
 
             let cat: Cat = cats[indexPath.row]
-            self.show(view: cell.catImageView)
+            self.show(view: cell.catImageView) //show progress hud
 
             cell.setLables(cat: cat)
 
@@ -66,11 +66,14 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
                 self.hide(view: cell.catImageView)
             } else { // have to download image
                 cell.catImageView.downloaded(from: cat.link) { (image) in
-                    self.dict[cat.id] = image
+                    //inside callback
+                    self.dict[cat.id] = image //store image on dictionary for future use
                     if collectionView.indexPathsForVisibleItems.contains(indexPath) {
+                        // if this cell is STILL on screen, set image
                         cell.catImageView.image = image
                         self.hide(view: cell.catImageView)
                     } else {
+                        //if cell not in screen, reload.
                         collectionView.reloadItems(at: [indexPath])
                     }
                 }
@@ -81,6 +84,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        // here we can make the magic of the layout, I decided to have 2 elements each row,but if the screen is to narrow, you can add an if statement and get another "width"
+        // you can also change the constraints on storyboard to make the size automatic depending on content
         let width = (self.collectionView.frame.width - 5) / 2 // 5 min space btw cells
         return CGSize(width: width, height: 300)
 //        return UICollectionViewFlowLayout.automaticSize
@@ -91,8 +96,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //        print(cats[indexPath.row].link)
 //    }
     
-    //reload data when device rotates
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        //reload data when device rotates
         self.collectionView.reloadData()
     }
     
